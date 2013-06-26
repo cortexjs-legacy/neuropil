@@ -1,0 +1,19 @@
+{
+  "name": "neuropil",
+  "version": "0.1.0",
+  "description": ">",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kaelzhang/cinerea.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/kaelzhang/cinerea/issues"
+  }
+}
