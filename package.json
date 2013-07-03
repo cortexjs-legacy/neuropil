@@ -15,5 +15,8 @@
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/kaelzhang/cinerea/issues"
+  },
+  "dependencies": {
+    "cradle": "~0.6.6"
   }
 }
