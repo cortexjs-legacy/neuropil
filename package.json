@@ -17,6 +17,7 @@
     "url": "https://github.com/kaelzhang/cinerea/issues"
   },
   "dependencies": {
-    "request": "~2.22.0"
+    "request": "~2.22.0",
+    "querystring": "~0.2.0"
   }
 }
