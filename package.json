@@ -1,6 +1,6 @@
 {
   "name": "neuropil",
-  "version": "0.1.1",
+  "version": "0.1.9",
   "description": ">",
   "main": "index.js",
   "scripts": {
@@ -8,18 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kaelzhang/cinerea.git"
+    "url": "git://github.com/kaelzhang/neuropil.git"
   },
   "author": "",
   "license": "BSD",
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/kaelzhang/cinerea/issues"
+    "url": "https://github.com/kaelzhang/neuropil/issues"
   },
   "dependencies": {
     "request": "~2.22.0",
     "querystring": "~0.2.0",
-    "async": "~0.2.9"
+    "async": "~0.2.9",
+    "semver": "~2.0.8"
   },
   "devDependencies": {
     "fs-sync": "~0.1.6"
