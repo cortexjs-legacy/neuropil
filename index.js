@@ -4,6 +4,8 @@ var neuropil = module.exports = function(options) {
     return new Neuropil(options); 
 };
 
+neuropil.Neuropil = Neuropil;
+
 var util = require('util');
 var events = require('events');
 var couchdb = require('./lib/couchdb');
