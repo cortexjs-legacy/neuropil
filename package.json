@@ -18,6 +18,10 @@
   },
   "dependencies": {
     "request": "~2.22.0",
-    "querystring": "~0.2.0"
+    "querystring": "~0.2.0",
+    "async": "~0.2.9"
+  },
+  "devDependencies": {
+    "fs-sync": "~0.1.6"
   }
 }
