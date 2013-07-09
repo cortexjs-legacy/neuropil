@@ -11,6 +11,12 @@ var events = require('events');
 var couchdb = require('./lib/couchdb');
 
 
+// @param {Object} options
+// - username
+// - password
+// - email
+// - port
+// - host
 function Neuropil(options) {
     this.options = options;
 
@@ -18,19 +24,21 @@ function Neuropil(options) {
         this.logger = options.logger;
     }
 
-    this.db = this._createDB(options);
+    this.db = this._createDB({
+        auth: {
+            username: options.username,
+            password: options.password
+        },
+
+        port    : options.port,
+        host    : options.host
+    });
 };
 
-// @param {Object} options
-// - auth: {Object}
-//      - username:
-//      - password
-// - port: {number}
-// - host: 'registry.npm.lc'
-// // - retries: 3,
-// // - retryTimeout: 30 * 1000
+// - retries: 3,
+// - retryTimeout: 30 * 1000
 Neuropil.prototype._createDB = function(options) {
-    return couchdb(options);  
+    return couchdb(options);
 };
 
 
@@ -42,9 +50,9 @@ Neuropil.prototype._createDB = function(options) {
 
 ].forEach(function(method) {
     Neuropil.prototype[method] = function(options, callback) {
-        var command = require('./lib/commands/' + method);
+        var command = require('./lib/command/' + method);
 
-        command(options, callback, this.logger, this.db);
+        command.call(this, options, callback, this.logger, this.db);
     }
 });
 
