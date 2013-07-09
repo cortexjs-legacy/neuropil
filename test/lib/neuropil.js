@@ -10,5 +10,5 @@ module.exports = neuropil({
     email: 'i@kael.me',
 
     port: 80,
-    host: 'registry.npm.dp'
+    host: 'registry.npm.lc'
 });
