@@ -20,7 +20,8 @@
     "request": "~2.22.0",
     "querystring": "~0.2.0",
     "async": "~0.2.9",
-    "semver": "~2.0.8"
+    "semver": "~2.0.8",
+    "sha": "~1.2.0"
   },
   "devDependencies": {
     "fs-sync": "~0.1.6"
