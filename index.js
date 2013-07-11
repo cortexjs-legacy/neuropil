@@ -32,7 +32,13 @@ function Neuropil(options) {
 
         port    : options.port,
         host    : options.host
+    
     });
+};
+
+Neuropil.prototype.on = function(type, handler) {
+    this.db.on(type, handler);
+    return this;    
 };
 
 // - retries: 3,
