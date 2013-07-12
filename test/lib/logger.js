@@ -3,6 +3,6 @@
 var loggie = require('loggie');
 
 module.exports = loggie({
-    level: '*',
+    level: 'info,warn,error',
     use_exit: false
 });
