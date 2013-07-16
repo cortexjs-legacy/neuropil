@@ -22,6 +22,8 @@ module.exports = neuropil({
         }) 
     );
 
+    e.json && this.logger.debug('json', e.json);
+
 }).on('response', function(e){
     this.logger.info(
         'CTX',

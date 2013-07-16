@@ -17,9 +17,9 @@ var neuropil = require('./lib/neuropil')
 neuropil.publish({
     tar: tar,
     pkg: pkg,
-    force: false,
+    force: true,
     enable_snapshot: true,
-    registry: 'http://registry.npm.dp'
+    registry: 'http://registry.npm.lc'
 
 }, function(err, res, json) {
     console.log(err, json);
