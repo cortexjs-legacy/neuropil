@@ -8,7 +8,7 @@ neuropil.Neuropil = Neuropil;
 
 var util = require('util');
 var events = require('events');
-var couchdb = require('./lib/couchdb');
+var couchdb = require('couch-db');
 
 
 // @param {Object} options
@@ -52,7 +52,8 @@ Neuropil.prototype._createDB = function(options) {
     'adduser', 
     'attachment', 
     'publish',
-    'unpublish'
+    'unpublish',
+    'install'
 
 ].forEach(function(method) {
     Neuropil.prototype[method] = function(options, callback) {

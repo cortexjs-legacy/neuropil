@@ -1,7 +1,7 @@
 {
   "name": "neuropil",
   "version": "0.1.10",
-  "description": ">",
+  "description": "europil is a lighter and faster registry client for couchdb based npm server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "git://github.com/kaelzhang/neuropil.git"
   },
   "author": "kael",
-  "license": "BSD",
+  "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/kaelzhang/neuropil/issues"
@@ -21,7 +21,8 @@
     "querystring": "~0.2.0",
     "async": "~0.2.9",
     "semver": "~2.0.8",
-    "sha": "~1.2.0"
+    "sha": "~1.2.0",
+    "couch-db": "~0.1.0"
   },
   "devDependencies": {
     "fs-sync": "~0.1.6"
