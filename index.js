@@ -57,6 +57,7 @@ Neuropil.prototype._get_commander = function (command) {
         commander = this.__commands[command] = require('./lib/command/' + command);
         commander.logger = this.logger;
         commander.db = this.db;
+        commander.options = this.options;
     }
 
     return commander;
