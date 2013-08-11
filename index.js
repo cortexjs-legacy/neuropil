@@ -20,11 +20,13 @@ var couchdb = require('couch-db');
 function Neuropil(options) {
     this.options = options;
 
+    this.__commands = {};
+
     if(options.logger){
         this.logger = options.logger;
     }
 
-    this.db = this._createDB({
+    this.db = this._create_db({
         auth: {
             username: options.username,
             password: options.password
@@ -43,8 +45,21 @@ Neuropil.prototype.on = function(type, handler) {
 
 // - retries: 3,
 // - retryTimeout: 30 * 1000
-Neuropil.prototype._createDB = function(options) {
+Neuropil.prototype._create_db = function(options) {
     return couchdb(options);
+};
+
+
+Neuropil.prototype._get_commander = function (command) {
+    var commander = this.__commands[command];
+
+    if(!commander){
+        commander = this.__commands[command] = require('./lib/command/' + command);
+        commander.logger = this.logger;
+        commander.db = this.db;
+    }
+
+    return commander;
 };
 
 
@@ -57,9 +72,9 @@ Neuropil.prototype._createDB = function(options) {
 
 ].forEach(function(method) {
     Neuropil.prototype[method] = function(options, callback) {
-        var command = require('./lib/command/' + method);
+        var commander = this._get_commander(method);
 
-        command.call(this, options, callback, this.logger, this.db);
+        commander.run(options, callback);
     }
 });
 
