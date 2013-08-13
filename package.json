@@ -22,7 +22,8 @@
     "async": "~0.2.9",
     "semver": "~2.0.8",
     "sha": "~1.2.0",
-    "couch-db": "~0.1.0"
+    "couch-db": "~0.1.0",
+    "tar.gz": "~0.1.1"
   },
   "devDependencies": {
     "fs-sync": "~0.1.6"
