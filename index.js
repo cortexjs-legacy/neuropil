@@ -34,7 +34,6 @@ function Neuropil(options) {
 
         port    : options.port,
         host    : options.host
-    
     });
 };
 
@@ -43,8 +42,7 @@ Neuropil.prototype.on = function(type, handler) {
     return this;    
 };
 
-// - retries: 3,
-// - retryTimeout: 30 * 1000
+
 Neuropil.prototype._create_db = function(options) {
     return couchdb(options);
 };
