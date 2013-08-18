@@ -26,15 +26,7 @@ function Neuropil(options) {
         this.logger = options.logger;
     }
 
-    this.db = this._create_db({
-        auth: {
-            username: options.username,
-            password: options.password
-        },
-
-        port    : options.port,
-        host    : options.host
-    });
+    this.changeDB(options);
 };
 
 Neuropil.prototype.on = function(type, handler) {
@@ -43,8 +35,16 @@ Neuropil.prototype.on = function(type, handler) {
 };
 
 
-Neuropil.prototype._create_db = function(options) {
-    return couchdb(options);
+Neuropil.prototype.changeDB = function(options) {
+    return this.db = couchdb({
+        auth: {
+            username: options.username,
+            password: options.password
+        },
+
+        port    : options.port,
+        host    : options.host
+    });
 };
 
 
