@@ -31,7 +31,7 @@ function Neuropil(options) {
 
 Neuropil.prototype.on = function(type, handler) {
     this.db.on( type, handler.bind(this) );
-    return this;    
+    return this;
 };
 
 
