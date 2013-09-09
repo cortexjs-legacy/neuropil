@@ -43,9 +43,28 @@ Neuropil.prototype.changeDB = function(options) {
         },
 
         port    : options.port,
-        host    : options.host
+        host    : options.host,
+        makeCallback: make_callback
     });
 };
+
+function make_callback (callback) {
+    return function (err, res, json) {
+        if ( !err && json && json.error ) {
+
+            // Convert couchdb error to javascript error
+            err = {};
+            // compatible
+            err.message = json.reason;
+            err.error = json.error;
+            err.toString = function () {
+                return json.reason;
+            };
+        }
+
+        callback(err, res, json);
+    };
+}
 
 
 Neuropil.prototype._get_commander = function (command) {
