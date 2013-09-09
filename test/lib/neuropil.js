@@ -6,12 +6,12 @@ var node_url = require('url');
 module.exports = neuropil({
     logger: require('./logger'),
 
-    username: 'kael2',
-    password: 'blah-blah-bie',
+    username: 'kael2dd',
+    password: 'blah-blah-biedd',
     email: 'i@kael.me',
 
     port: 80,
-    host: 'registry.npm.lc'
+    host: 'registry.npm.dp'
 
 }).on('request', function(e) {
     this.logger.info(

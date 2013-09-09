@@ -4,9 +4,10 @@ var neuropil = require('./lib/neuropil')
 
 
 neuropil.adduser({
-    username: 'kael2',
+    username: 'kael6',
     password: 'blah-blah-bie',
-    email: 'i@kael.me'
+    email: 'i@kael.me',
+    signup: true
 
 }, function(err, res, json) {
     console.log(err, json);
