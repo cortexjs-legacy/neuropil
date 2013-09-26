@@ -36,7 +36,7 @@ Neuropil.prototype.on = function(type, handler) {
 
 
 Neuropil.prototype.changeDB = function(options) {
-    return this.db = couchdb({
+    this.db = couchdb({
         auth: {
             username: options.username,
             password: options.password
@@ -46,6 +46,22 @@ Neuropil.prototype.changeDB = function(options) {
         host    : options.host,
         makeCallback: make_callback
     });
+
+    this._hook_db_get();
+
+    return this.db;
+};
+
+// all get 
+Neuropil.prototype._hook_db_get = function() {
+    var db = this.db;
+    var get_method = db.get;
+
+    db.get = function (doc, callback) {
+        return get_method.call(db, doc, {
+            auth: null
+        }, callback);
+    };
 };
 
 function make_callback (callback) {
