@@ -6,8 +6,8 @@ var neuropil = module.exports = function(options) {
 
 neuropil.Neuropil = Neuropil;
 
-var util = require('util');
-var events = require('events');
+var util    = require('util');
+// var EE      = require('events').EventEmitter;
 var couchdb = require('couch-db');
 
 
@@ -29,6 +29,8 @@ function Neuropil(options) {
     this.changeDB(options);
 };
 
+// util.inherits(Neuropil, EE);
+
 Neuropil.prototype.on = function(type, handler) {
     this.db.on( type, handler.bind(this) );
     return this;
@@ -47,13 +49,13 @@ Neuropil.prototype.changeDB = function(options) {
         makeCallback: make_callback
     });
 
-    this._hook_db_get();
+    this._hookDbGet();
 
     return this.db;
 };
 
 // all get 
-Neuropil.prototype._hook_db_get = function() {
+Neuropil.prototype._hookDbGet = function() {
     var db = this.db;
     var get_method = db.get;
 
