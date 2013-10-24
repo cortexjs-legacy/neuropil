@@ -59,10 +59,15 @@ Neuropil.prototype._hookDbGet = function() {
     var db = this.db;
     var get_method = db.get;
 
-    db.get = function (doc, callback) {
-        return get_method.call(db, doc, {
-            auth: null
-        }, callback);
+    db.get = function (doc, options, callback) {
+        if ( arguments.length === 2 ) {
+            callback = options;
+            options = {};
+        }
+
+        options.auth = null;
+
+        return get_method.call(db, doc, options, callback);
     };
 };
 
