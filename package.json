@@ -1,6 +1,6 @@
 {
   "name": "neuropil",
-  "version": "0.4.1",
+  "version": "1.2.1",
   "description": "europil is a lighter and faster registry client for couchdb based npm server",
   "main": "index.js",
   "scripts": {
@@ -28,5 +28,8 @@
   },
   "devDependencies": {
     "fs-sync": "~0.1.6"
+  },
+  "engines": {
+    "node": ">=0.8.17"
   }
 }
