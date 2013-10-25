@@ -28,6 +28,9 @@ function Neuropil(options) {
         this.logger = options.logger;
     }
 
+    // for commander
+    this.context = this;
+
     this.changeDB(options);
 };
 
