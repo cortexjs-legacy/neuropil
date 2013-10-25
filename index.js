@@ -24,10 +24,6 @@ function Neuropil(options) {
 
     this.__commands = {};
 
-    if(options.logger){
-        this.logger = options.logger;
-    }
-
     // for commander
     this.context = this;
 
