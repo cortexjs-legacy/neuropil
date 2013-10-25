@@ -6,9 +6,11 @@ var neuropil = module.exports = function(options) {
 
 neuropil.Neuropil = Neuropil;
 
-var util    = require('util');
-// var EE      = require('events').EventEmitter;
-var couchdb = require('couch-db');
+var util        = require('util');
+var EE          = require('events').EventEmitter;
+var couchdb     = require('couch-db');
+
+var init_commander   = require('./lib/util/init-commander'); 
 
 
 // @param {Object} options
@@ -29,7 +31,7 @@ function Neuropil(options) {
     this.changeDB(options);
 };
 
-// util.inherits(Neuropil, EE);
+util.inherits(Neuropil, EE);
 
 Neuropil.prototype.on = function(type, handler) {
     this.db.on( type, handler.bind(this) );
@@ -50,6 +52,7 @@ Neuropil.prototype.changeDB = function(options) {
     });
 
     this._hookDbGet();
+    this._initDbEvents();
 
     return this.db;
 };
@@ -70,6 +73,20 @@ Neuropil.prototype._hookDbGet = function() {
         return get_method.call(db, doc, options, callback);
     };
 };
+
+
+// listen the events of couch-db
+Neuropil.prototype._initDbEvents = function() {
+    var self = this;
+    this.db.on('request', function (e) {
+        self.emit('request', e); 
+    });
+
+    this.db.on('response', function(e){
+        self.emit('response', e);
+    });
+};
+
 
 function make_callback (callback) {
     return function (err, res, json) {
@@ -94,10 +111,7 @@ Neuropil.prototype._get_commander = function (command) {
     var commander = this.__commands[command];
 
     if(!commander){
-        commander = this.__commands[command] = require('./lib/command/' + command);
-        commander.logger = this.logger;
-        commander.db = this.db;
-        commander.options = this.options;
+        commander = this.__commands[command] = init_commander(require('./lib/command/' + command), this);
     }
 
     return commander;
@@ -110,7 +124,7 @@ Neuropil.prototype._get_commander = function (command) {
     'publish',
     'unpublish',
     'install',
-    'exists'
+    'get'
 
 ].forEach(function(method) {
     Neuropil.prototype[method] = function(options, callback) {
