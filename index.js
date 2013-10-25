@@ -32,11 +32,6 @@ function Neuropil(options) {
 
 util.inherits(Neuropil, EE);
 
-Neuropil.prototype.on = function(type, handler) {
-    this.db.on( type, handler.bind(this) );
-    return this;
-};
-
 
 Neuropil.prototype.changeDB = function(options) {
     this.db = couchdb({
