@@ -118,13 +118,14 @@ Neuropil.prototype._get_commander = function (command) {
     'publish',
     'unpublish',
     'install',
-    'get'
+    'get',
+    'request'
 
 ].forEach(function(method) {
-    Neuropil.prototype[method] = function(options, callback) {
+    Neuropil.prototype[method] = function() {
         var commander = this._get_commander(method);
 
-        commander.run(options, callback);
+        commander.run.apply(commander, arguments);
     }
 });
 
