@@ -42,7 +42,8 @@ Neuropil.prototype.changeDB = function(options) {
 
         port    : options.port,
         host    : options.host,
-        makeCallback: make_callback
+        makeCallback    : make_callback,
+        cacheMapper     : options.cacheMapper
     });
 
     this._hookDbGet();
@@ -118,8 +119,7 @@ Neuropil.prototype._get_commander = function (command) {
     'publish',
     'unpublish',
     'install',
-    'get',
-    'request'
+    'get'
 
 ].forEach(function(method) {
     Neuropil.prototype[method] = function() {
