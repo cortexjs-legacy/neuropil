@@ -119,7 +119,8 @@ Neuropil.prototype._get_commander = function (command) {
     'publish',
     'unpublish',
     'install',
-    'get'
+    'get',
+    'put'
 
 ].forEach(function(method) {
     Neuropil.prototype[method] = function() {
