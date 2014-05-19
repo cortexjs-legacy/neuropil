@@ -1,11 +1,19 @@
 {
   "name": "neuropil",
-  "version": "3.0.4",
-  "description": "europil is a lighter and faster registry client for couchdb based npm server",
+  "version": "3.0.5",
+  "description": "neuropil is the cortex registry client.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "connect",
+    "cortex",
+    "registry",
+    "client",
+    "couchdb",
+    "npm"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/kaelzhang/neuropil.git"
