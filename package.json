@@ -1,6 +1,6 @@
 {
   "name": "neuropil",
-  "version": "3.0.5",
+  "version": "3.1.0",
   "description": "neuropil is the cortex registry client.",
   "main": "index.js",
   "scripts": {
@@ -25,15 +25,16 @@
     "url": "https://github.com/kaelzhang/neuropil/issues"
   },
   "dependencies": {
-    "request": "~2.26.0",
-    "querystring": "~0.2.0",
-    "async": "~0.2.9",
-    "semver": "~2.2.1",
-    "sha": "~1.2.0",
-    "couch-db": "~0.6.1",
-    "fstream": "~0.1.24",
-    "tar": "~0.1.18",
+    "async": "^0.2.9",
+    "couch-db": "^0.6.1",
     "fs-extra": "^0.8.1",
+    "fstream": "^0.1.24",
+    "querystring": "^0.2.0",
+    "request": "^2.26.0",
+    "semver": "^2.2.1",
+    "semver-stable": "^0.1.2",
+    "sha": "^1.2.0",
+    "tar": "^0.1.18",
     "underscore": "^1.6.0"
   },
   "devDependencies": {
