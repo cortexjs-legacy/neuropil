@@ -1,7 +1,7 @@
 {
   "name": "neuropil",
-  "version": "3.1.8",
-  "description": "neuropil is the cortex registry client.",
+  "version": "4.0.0",
+  "description": "Neuropil is the cortex registry client.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,13 +16,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kaelzhang/neuropil.git"
+    "url": "git://github.com/kaelzhang/node-neuropil.git"
   },
   "author": "kael",
   "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/kaelzhang/neuropil/issues"
+    "url": "https://github.com/kaelzhang/node-neuropil/issues"
   },
   "dependencies": {
     "async": "^0.2.9",
