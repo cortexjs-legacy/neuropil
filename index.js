@@ -1,16 +1,16 @@
 'use strict';
 
 var neuropil = module.exports = function(options) {
-    return new Neuropil(options); 
+  return new Neuropil(options);
 };
 
 neuropil.Neuropil = Neuropil;
 
-var util        = require('util');
-var EE          = require('events').EventEmitter;
-var couchdb     = require('couch-db');
+var util = require('util');
+var EE = require('events').EventEmitter;
+var couchdb = require('couch-db');
 
-var init_commander   = require('./lib/util/init-commander'); 
+var init_commander = require('./lib/util/init-commander');
 
 
 // @param {Object} options
@@ -20,115 +20,114 @@ var init_commander   = require('./lib/util/init-commander');
 // - port
 // - host
 function Neuropil(options) {
-    this.options = options;
+  this.options = options;
 
-    this.__commands = {};
+  this.__commands = {};
 
-    // for commander
-    this.context = this;
+  // for commander
+  this.context = this;
 
-    this.changeDB(options);
+  this.changeDB(options);
 };
 
 util.inherits(Neuropil, EE);
 
 
 Neuropil.prototype.changeDB = function(options) {
-    this.db = couchdb({
-        auth: {
-            username: options.username,
-            password: options.password
-        },
+  this.db = couchdb({
+    auth: {
+      username: options.username,
+      password: options.password
+    },
 
-        port    : options.port,
-        host    : options.host,
-        makeCallback    : make_callback,
-        cacheMapper     : options.cacheMapper
-    });
+    port: options.port,
+    host: options.host,
+    makeCallback: make_callback,
+    cacheMapper: options.cacheMapper
+  });
 
-    this._hookDbGet();
-    this._initDbEvents();
-    this.host = options.host;
-    this.port = options.port;
+  this._hookDbGet();
+  this._initDbEvents();
+  this.host = options.host;
+  this.port = options.port;
 
-    return this.db;
+  return this.db;
 };
 
 // all get 
 Neuropil.prototype._hookDbGet = function() {
-    var db = this.db;
-    var get_method = db.get;
+  var db = this.db;
+  var get_method = db.get;
 
-    db.get = function (doc, options, callback) {
-        if ( arguments.length === 2 ) {
-            callback = options;
-            options = {};
-        }
+  db.get = function(doc, options, callback) {
+    if (arguments.length === 2) {
+      callback = options;
+      options = {};
+    }
 
-        options.auth = null;
+    options.auth = null;
 
-        return get_method.call(db, doc, options, callback);
-    };
+    return get_method.call(db, doc, options, callback);
+  };
 };
 
 
 // listen the events of couch-db
 Neuropil.prototype._initDbEvents = function() {
-    var self = this;
-    this.db.on('request', function (e) {
-        self.emit('request', e); 
-    });
+  var self = this;
+  this.db.on('request', function(e) {
+    self.emit('request', e);
+  });
 
-    this.db.on('response', function(e){
-        self.emit('response', e);
-    });
+  this.db.on('response', function(e) {
+    self.emit('response', e);
+  });
 };
 
 
-function make_callback (callback) {
-    return function (err, res, json) {
-        if ( !err && json && json.error ) {
+function make_callback(callback) {
+  return function(err, res, json) {
+    if (!err && json && json.error) {
 
-            // Convert couchdb error to javascript error
-            err = {};
-            // compatible
-            err.message = json.reason;
-            err.error = json.error;
-            err.toString = function () {
-                return json.reason;
-            };
-        }
+      // Convert couchdb error to javascript error
+      err = {};
+      // compatible
+      err.message = json.reason;
+      err.error = json.error;
+      err.toString = function() {
+        return json.reason;
+      };
+    }
 
-        callback(err, res, json);
-    };
+    callback(err, res, json);
+  };
 }
 
 
-Neuropil.prototype._get_commander = function (command) {
-    var commander = this.__commands[command];
+Neuropil.prototype._get_commander = function(command) {
+  var commander = this.__commands[command];
 
-    if(!commander){
-        commander = this.__commands[command] = init_commander(require('./lib/command/' + command), this);
-    }
+  if (!commander) {
+    commander = this.__commands[command] = init_commander(require('./lib/command/' + command), this);
+  }
 
-    return commander;
+  return commander;
 };
 
 
 [
-    'adduser', 
-    'attachment', 
-    'publish',
-    'unpublish',
-    'install',
-    'get',
-    'put'
+  'adduser',
+  'attachment',
+  'publish',
+  'unpublish',
+  'install',
+  'get',
+  'put'
 
 ].forEach(function(method) {
-    Neuropil.prototype[method] = function() {
-        var commander = this._get_commander(method);
+  Neuropil.prototype[method] = function() {
+    var commander = this._get_commander(method);
 
-        commander.run.apply(commander, arguments);
-    }
+    commander.run.apply(commander, arguments);
+  }
 });
-
