@@ -48,6 +48,8 @@ Neuropil.prototype.changeDB = function(options) {
 
     this._hookDbGet();
     this._initDbEvents();
+    this.host = options.host;
+    this.port = options.port;
 
     return this.db;
 };
