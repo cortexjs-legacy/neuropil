@@ -1,5 +1,6 @@
 # Cortex project
 build/
+cortex-registry-server/
 
 # php files
 index.php
