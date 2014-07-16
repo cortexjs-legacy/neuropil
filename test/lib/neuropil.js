@@ -1,37 +1,36 @@
 'use strict';
 
-var neuropil = require('neuropil');
+var neuropil = require('../../');
 var node_url = require('url');
+var logger = require('./logger');
 
 module.exports = neuropil({
-    logger: require('./logger'),
-
     username: 'kael2dd',
     password: 'blah-blah-biedd',
     email: 'i@kael.me',
 
     port: 80,
-    host: 'registry.npm.dp'
+    host: '127.0.0.1:5984'
 
 }).on('request', function(e) {
-    this.logger.info(
+    logger.info(
         'CTX', 
-        this.logger.template('{{magenta method}} {{url}}', {
+        logger.template('{{magenta method}} {{url}}', {
             url     : e.safe_url,
             method  : e.method
         }) 
     );
 
-    e.json && this.logger.debug('json', e.json);
+    e.json && logger.debug('json', e.json);
 
 }).on('response', function(e){
-    this.logger.info(
+    logger.info(
         'CTX',
         e.err ? '{{red ' + (e.res.statusCode || 'ERR') + '}}' : '{{green ' + (e.res.statusCode || 'OK!') + '}}',
         e.req.safe_url
     );
 
-    this.logger.debug(
+    logger.debug(
         '{{magenta ' + e.req.method + '}}',
         node_url.parse(e.req.safe_url).pathname,
         e.err,

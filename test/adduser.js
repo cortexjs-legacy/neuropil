@@ -3,13 +3,18 @@
 var neuropil = require('./lib/neuropil')
 
 
-neuropil.adduser({
-    username: 'kael6',
-    password: 'blah-blah-bie',
-    email: 'i@kael.me',
-    signup: true
+describe('adduser', function() {
+  it('adduser', function(done) {
+    neuropil.adduser({
+      username: 'kael6',
+      password: 'blah-blah-bie',
+      email: 'i@kael.me',
+      signup: true
 
-}, function(err, res, json) {
-    console.log(err, json);
+    }, function(err, res, json) {
+      if(err) return done(err);
 
+      console.log(err, json);
+    });
+  });
 });

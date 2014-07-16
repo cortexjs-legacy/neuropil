@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "init-reg": "DEPLOY_VERSION=\"git describe --tags\" ./node_modules/.bin/couchapp push ./cortex-registry-server/registry/app http://admin:admin@localhost:5984/registry",
-    "test": "curl http://127.0.0.1:5984/"
+    "test": "mocha test/adduser.js"
   },
   "keywords": [
     "connect",
@@ -41,7 +41,8 @@
   "devDependencies": {
     "couchapp": "^0.11.0",
     "fs-sync": "~0.1.6",
-    "loggie": "^0.1.15"
+    "loggie": "^0.1.15",
+    "mocha": "^1.20.1"
   },
   "engines": {
     "node": ">=0.8.17"
