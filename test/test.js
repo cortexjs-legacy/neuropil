@@ -6,7 +6,7 @@ var neuropil = require('./lib/neuropil')
 var fs = require('fs-sync');
 var node_path = require('path');
 
-var pkg = fs.readJSON('/Users/Kael/Codes/Framework/neuropil/test/fixtures/package.json');
+var pkg = fs.readJSON(node_path.join(__dirname, 'fixtures/package.json'));
 var tar = node_path.join( __dirname, 'fixtures', 'fs-sync-0.1.6.tgz' );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
