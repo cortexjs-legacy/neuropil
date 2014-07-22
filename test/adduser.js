@@ -1,5 +1,6 @@
 'use strict';
 
+var assert = require('chai').assert;
 var neuropil = require('./lib/neuropil')
 
 
@@ -14,7 +15,9 @@ describe('adduser', function() {
     }, function(err, res, json) {
       if(err) return done(err);
 
-      console.log(err, json);
+      assert(json.ok);
+      assert.equal(json.id, 'org.couchdb.user:kael6');
+      done();
     });
   });
 });
