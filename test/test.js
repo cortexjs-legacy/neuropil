@@ -52,6 +52,7 @@ describe('neuropil', function() {
 
       neuropil.install({
         packages: ["fs-sync@>0.1.0"],
+        dependency_key: "dependencies",
         dir: node_path.join(process.env.HOME, "installed")
       }, function (err, cached) {
         if(err) return done(err);
