@@ -31,6 +31,7 @@ describe('neuropil', function() {
       email: 'i@kael.me',
       signup: false
     }, function(err, res, json) {
+      console.log(json);
       if(err) return done(err);
 
       assert(json.ok);
@@ -39,15 +40,40 @@ describe('neuropil', function() {
     });
   });
 
-  it('publish', function(done) {
+  it('publish && unpublish && exists', function(done) {
     neuropil.publish({
       tar: tar,
       pkg: pkg,
       force: true,
       enable_snapshot: true
     }, function(err, res, json) {
-      console.log(err, json);
-      done(err);
+      console.log(json);
+      if(err) return done(err);
+
+      neuropil.exists({
+        name: 'fs-sync',
+        version: '0.1.8'
+      }, function (err, data) {
+        if(err) return done(err);
+        assert(data.exists, "fs-sync@0.1.8 exists");
+        
+        neuropil.exists({
+          name: "fs-sync",
+          version: "0.1.2"
+        }, function(err, data) {
+          if(err) return done(err);
+          assert(!data.exists, "fs-sync@0.1.2 does not exist");
+          
+          neuropil.unpublish({
+            name: 'fs-sync',
+            version: '0.1.8'
+          }, function(err, res, json) {
+            console.log(json);
+            if(err) return done(err);
+            done();
+          });
+        });
+      });
     });
   });
 
