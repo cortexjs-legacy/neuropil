@@ -50,28 +50,20 @@ describe('neuropil', function() {
       console.log(json);
       if(err) return done(err);
 
-      neuropil.exists({
-        name: 'fs-sync',
-        version: '0.1.8'
-      }, function (err, data) {
+      neuropil.install({
+        packages: ["fs-sync@>0.1.0"],
+        dir: node_path.join(process.env.HOME, "installed")
+      }, function (err, cached) {
         if(err) return done(err);
-        assert(data.exists, "fs-sync@0.1.8 exists");
-        
-        neuropil.exists({
-          name: "fs-sync",
-          version: "0.1.2"
-        }, function(err, data) {
+        console.log(cached);
+
+        neuropil.unpublish({
+          name: 'fs-sync',
+          version: '0.1.8'
+        }, function(err, res, json) {
+          console.log(json);
           if(err) return done(err);
-          assert(!data.exists, "fs-sync@0.1.2 does not exist");
-          
-          neuropil.unpublish({
-            name: 'fs-sync',
-            version: '0.1.8'
-          }, function(err, res, json) {
-            console.log(json);
-            if(err) return done(err);
-            done();
-          });
+          done();
         });
       });
     });
