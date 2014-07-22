@@ -73,6 +73,7 @@ Neuropil.prototype._hookDbGet = function() {
     }
 
     options.auth = null;
+    // apply proxy options
     if (proxy) {
       options.proxy = proxy;
     }
@@ -80,7 +81,7 @@ Neuropil.prototype._hookDbGet = function() {
     return get_method.call(db, doc, options, callback);
   };
 
-  // add proxy options
+  // apply proxy options
   ['put', 'del', 'attachment'].forEach(function(method) {
     var origin_method = db[method];
     db[method] = function(path, options, callback) {
