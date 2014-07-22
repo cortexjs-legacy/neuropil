@@ -12,6 +12,7 @@ var tar = node_path.join( __dirname, 'fixtures', 'fs-sync-0.1.6.tgz' );
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 describe('neuropil', function() {
+  this.timeout(20000);
 
   before(function(done) {
     neuropil.adduser({
@@ -40,7 +41,8 @@ describe('neuropil', function() {
     });
   });
 
-  it('publish && unpublish && exists', function(done) {
+
+  it('publish && unpublish && install', function(done) {
     neuropil.publish({
       tar: tar,
       pkg: pkg,

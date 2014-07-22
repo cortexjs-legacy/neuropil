@@ -9,8 +9,8 @@ module.exports = neuropil({
     username: 'ntest',
     password: 'ntest',
     email: 'ntest@test.com',
-    port: 80,
-    host: '127.0.0.1:5984'
+    port: 5984,
+    host: '127.0.0.1:5984',
 }).on('request', function(e) {
     logger.info(
         'CTX', 
