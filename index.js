@@ -34,7 +34,7 @@ util.inherits(Neuropil, EE);
 
 
 Neuropil.prototype.changeDB = function(options) {
-  this.db = couchdb({
+  var dbOpts = {
     auth: {
       username: options.username,
       password: options.password
@@ -42,20 +42,27 @@ Neuropil.prototype.changeDB = function(options) {
 
     port: options.port,
     host: options.host,
-    makeCallback: make_callback,
-    cacheMapper: options.cacheMapper
-  });
+    makeCallback: make_callback
+  };
+
+  if( options.cacheMapper ) {
+    dbOpts.cacheMapper = options.cacheMapper;
+  }
+
+  this.db = couchdb(dbOpts);
 
   this._hookDbGet();
   this._initDbEvents();
   this.host = options.host;
   this.port = options.port;
+  this.proxy = options.proxy;
 
   return this.db;
 };
 
 // all get 
 Neuropil.prototype._hookDbGet = function() {
+  var proxy = this.proxy;
   var db = this.db;
   var get_method = db.get;
 
@@ -66,9 +73,28 @@ Neuropil.prototype._hookDbGet = function() {
     }
 
     options.auth = null;
+    if (proxy) {
+      options.proxy = proxy;
+    }
 
     return get_method.call(db, doc, options, callback);
   };
+
+  // add proxy options
+  ['put', 'del', 'attachment'].forEach(function(method) {
+    var origin_method = db[method];
+    db[method] = function(path, options, callback) {
+      if (arguments.length === 2) {
+        callback = options;
+        options = {};
+      }
+      
+      if (proxy) {
+        options.proxy = proxy;
+      }
+      return origin_method.call(db, path, options, callback);
+    };
+  });
 };
 
 

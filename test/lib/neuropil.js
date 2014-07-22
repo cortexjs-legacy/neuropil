@@ -6,33 +6,11 @@ var node_path = require('path');
 var logger = require('./logger');
 
 module.exports = neuropil({
-    username: 'kael2dd',
-    password: 'blah-blah-biedd',
-    email: 'i@kael.me',
-
+    username: 'ntest',
+    password: 'ntest',
+    email: 'ntest@test.com',
     port: 80,
-    host: '127.0.0.1:5984',
-    cacheMapper: function (options, callback) {
-      // no cache by default
-      var url = node_url.parse(options.url || options.uri);
-      var filepath = [
-        '.node_modified', 
-        url.protocol && url.protocol.replace(/:$/, '') || 'unknown',
-        // 'user:pass' -> 'user%3Apass'
-        url.auth,
-        url.hostname,
-        url.port,
-        url.pathname,
-        url.query
-      ]
-        .filter(Boolean)
-        .map(encodeURIComponent)
-        .join(node_path.sep);
-      var USER_HOME   = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
-      var file = node_path.join(USER_HOME, filepath);
-      console.log(USER_HOME, filepath,  file, node_path.dirname(file));
-      callback(null, node_path.join(USER_HOME, filepath) );
-    }
+    host: '127.0.0.1:5984'
 }).on('request', function(e) {
     logger.info(
         'CTX', 

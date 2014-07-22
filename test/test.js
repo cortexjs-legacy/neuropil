@@ -15,9 +15,9 @@ describe('neuropil', function() {
 
   before(function(done) {
     neuropil.adduser({
-      username: "test",
-      password: "test",
-      email: "test@test.com",
+      username: "ntest",
+      password: "ntest",
+      email: "ntest@test.com",
       signup: true
     }, function(err, res, json) {
       done(err)
