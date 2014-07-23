@@ -1,4 +1,6 @@
-# Neuropil
+# Neuropil 
+
+[![NPM version](https://badge.fury.io/js/neuropil.png)](http://badge.fury.io/js/neuropil) [![Build Status](https://travis-ci.org/cortexjs/neuropil.png)](https://travis-ci.org/cortexjs/neuropil)
 
 > Neuropil is a synaptically dense region in the nervous system composed of mostly unmyelinated axons, dendrites and glial cell processes.
 
