@@ -50,12 +50,12 @@ Neuropil.prototype.changeDB = function(options) {
   }
 
   this.db = couchdb(dbOpts);
+  this.proxy = options.proxy;
+  this.host = options.host;
+  this.port = options.port;
 
   this._hookDbGet();
   this._initDbEvents();
-  this.host = options.host;
-  this.port = options.port;
-  this.proxy = options.proxy;
 
   return this.db;
 };
