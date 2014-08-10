@@ -5,7 +5,7 @@ node_js:
   - "0.10"
 
 script: npm run init-reg; npm run test;
-  
+
 services:
   - couchdb
 
