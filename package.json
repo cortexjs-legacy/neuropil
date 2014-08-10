@@ -1,6 +1,6 @@
 {
   "name": "neuropil",
-  "version": "5.0.3",
+  "version": "6.0.0",
   "description": "Neuropil is the cortex registry client.",
   "main": "index.js",
   "scripts": {
